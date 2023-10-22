@@ -13,8 +13,8 @@ public class Ex4 {
             System.out.print("Podano liczbę spoza dopuszczalnego przedziału.");
         } else {
             int[][] tabA = new int[n][n];
-            for (int i = 0; i < n; i++) {
-                for (int j = 1; j <= n; j++) {
+            for (int i = 1; i < n; i++) {
+                for (int j = 1; j < n; j++) {
                     tabA[i][j] = i * j;
                     System.out.print(tabA[i][j] + "\t");
                 }
