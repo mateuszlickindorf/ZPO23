@@ -29,12 +29,14 @@ public class Ex6 {
         }
 
         if (miesiac == 2) {
-            dopuszczalnyDzien = 29;
-        } else {
-            dopuszczalnyDzien = 31;
+            if ((rok % 4 == 0 && rok % 100 != 0) || rok % 400 == 0) {
+                dopuszczalnyDzien = 29;
+            } else {
+                dopuszczalnyDzien = 28;
+            }
         }
 
-        if ((dzien < 1) || (dzien >= dopuszczalnyDzien)) {
+        if ((dzien < 1) || (dzien > dopuszczalnyDzien)) {
             throw new IllegalArgumentException("Podano nieprawidłowy dzień.");
         }
 
