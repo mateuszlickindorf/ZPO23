@@ -1,6 +1,11 @@
 import java.util.Scanner;
 
 public class Ex2 {
+    /**
+     * Porównuje ciąg referencyjny z ciągiem wprowadzonym przez użytkownika w celu weryfikacji zgodności znaków.
+     *
+     * @param args argymenty wiersza poleceń.
+     */
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
