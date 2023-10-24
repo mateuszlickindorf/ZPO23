@@ -1,16 +1,30 @@
 import java.util.Scanner;
 
-/**
-* Komentarz dokumentacyjny
-*/
 public class Ex1 {
+    /**
+     * Oblicza zasięg i maksymalny pułap pocisku na podstawie danych wprowadzonych przez użytkownika.
+     *
+     * @param args Argumenty wiersza poleceń.
+     */
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Podaj prędkość: ");
-        double v0 = scanner.nextDouble();
+        double v0;
+        try {
+            v0 = scanner.nextDouble();
+        } catch (java.util.InputMismatchException e) {
+            System.out.println("Błąd: Wprowadź poprawną wartość liczbową dla prędkości.");
+            return;
+        }
         System.out.println("Podaj kąt uderzenia: ");
-        double angle = scanner.nextDouble();
+        double angle;
+        try {
+            angle = scanner.nextDouble();
+        } catch (java.util.InputMismatchException e) {
+            System.out.println("Błąd: Wprowadź poprawną wartość liczbową dla kąta.");
+            return;
+        }
         double angle_radian = Math.toRadians(angle);
 
         scanner.close();
