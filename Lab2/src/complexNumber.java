@@ -1,3 +1,4 @@
+import java.util.Objects;
 
 /**
  * Klasa reprezentująca wektor w przestrzeni zespolonej
@@ -36,8 +37,39 @@ public class complexNumber extends Vector2D {
         return new complexNumber(realPart, imaginaryPart);
     }
 
+    public complexNumber power(int n) {
+        double module = getModule();
+        double argument = getArgument();
+        double resultModule = Math.pow(module, n);
+        double resultArgument = argument * n;
+        double realPart = resultModule * Math.cos(resultArgument);
+        double imaginaryPart = resultModule * Math.sin(resultArgument);
+        return new complexNumber(realPart, imaginaryPart);
+    }
 
+    public static complexNumber fromPolar(double module, double argument) {
+        double realPart = module * Math.cos(argument);
+        double imaginaryPart = module * Math.sin(argument);
+        return new complexNumber(realPart, imaginaryPart);
+    }
 
+    @Override
+    public String toString() {
+        return getX() + " + " + getY() + "i";
+    }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        complexNumber other = (complexNumber) obj;
+        return Double.compare(other.getX(), getX()) == 0 && Double.compare(other.getY(), getY()) == 0;
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(getX(), getY());
+    }
 }
+
+
