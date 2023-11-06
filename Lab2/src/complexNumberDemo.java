@@ -11,11 +11,11 @@ public class complexNumberDemo {
             System.out.println("Moduł num1: " + module1);
             System.out.println("Argument num1: " + argument1);
 
-            complexNumber sum = num1.add(num2);
-            complexNumber difference = num1.subtract(num2);
-            complexNumber product = num1.multiply(num2);
-            complexNumber quotient = num1.divide(num2);
-            complexNumber power = num1.power(3);
+            complexNumber sum = complexNumber.add(num1, num2);
+            complexNumber difference = complexNumber.subtract(num1, num2);
+            complexNumber product = complexNumber.multiply(num1, num2);
+            complexNumber quotient = complexNumber.divide(num1, num2);
+            complexNumber power = complexNumber.power(num1, 2);
 
             System.out.println("Suma: " + sum.toString());
             System.out.println("Różnica: " + difference.toString());
@@ -27,6 +27,6 @@ public class complexNumberDemo {
             System.out.println("Forma katezjańska num1: " + polarNum1);
 
             complexNumber num3 = new complexNumber(1, 2);
-            System.out.println("num1 equals num3: " + num1.equals(num3));
+            System.out.println("num1 równa się num3: " + num1.equals(num3));
         }
 }
