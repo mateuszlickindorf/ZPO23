@@ -28,5 +28,13 @@ public class complexNumberDemo {
 
         complexNumber num3 = new complexNumber(1, 2);
         System.out.println("num1 equals num3: " + num1.equals(num3));
+        try {
+            complexNumber number = complexNumber.getComplexNumberFromUser();
+            // Process the valid input
+        } catch (InvalidInputException e) {
+            System.out.println("Invalid input: " + e.getMessage());
+            System.out.println("Invalid input details: " + e.getInput());
+            // Handle the invalid input case
+        }
     }
 }

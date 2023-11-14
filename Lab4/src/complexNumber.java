@@ -1,4 +1,5 @@
 import java.util.Objects;
+import java.util.Scanner;
 
 /**
  * Represents a complex number with real and imaginary parts.
@@ -111,6 +112,28 @@ public class complexNumber extends Vector2D {
         return new complexNumber(realPart, imaginaryPart);
     }
 
+    /**
+     * Retrieves a complex number from the user in the form x+iy or other valid variations.
+     *
+     * @return The complex number entered by the user.
+     * @throws InvalidInputException if the input format is incorrect.
+     */
+    public static complexNumber getComplexNumberFromUser() throws InvalidInputException {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter a complex number in the form x+iy or other valid variations:");
+        String input = scanner.nextLine();
+
+        // Use a regular expression to validate and extract real and imaginary parts
+        String regex = "([-+]?\\d*\\.?\\d+)\\s*([-+]?)\\s*([-+]?\\d*\\.?\\d*)i";
+        if (input.matches(regex)) {
+            double realPart = Double.parseDouble(input.replaceAll(regex, "$1"));
+            double imaginaryPart = Double.parseDouble(input.replaceAll(regex, "$2$3"));
+            return new complexNumber(realPart, imaginaryPart);
+        } else {
+            throw new InvalidInputException("Invalid input format. Please enter a valid complex number.", input);
+        }
+    }
+
     @Override
     public String toString() {
         return getX() + " + " + getY() + "i";
@@ -128,6 +151,7 @@ public class complexNumber extends Vector2D {
     public int hashCode() {
         return Objects.hash(getX(), getY());
     }
+
 }
 
 
