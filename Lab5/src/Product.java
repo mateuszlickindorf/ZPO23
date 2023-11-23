@@ -1,7 +1,7 @@
 /**
  * The Product interface represents a product in a warehouse.
  */
-public interface ProductMap {
+public interface Product {
     /**
      * Gets the name of the product.
      *
@@ -22,4 +22,12 @@ public interface ProductMap {
      * @return The count of the product.
      */
     int fetchCount();
+
+    /**
+     * Gets information about of the product.
+     *
+     * @return Information about the product.
+     */
+    int getProductInfo();
+
 }
