@@ -4,7 +4,7 @@ import java.util.Scanner;
 /**
  * Represents a complex number with real and imaginary parts.
  */
-public class complexNumber extends Vector2D {
+public class complexNumberExcepHand extends Vector2DExcepHand {
 
     /**
      * Constructs a complex number with the specified real and imaginary parts.
@@ -12,7 +12,7 @@ public class complexNumber extends Vector2D {
      * @param x The real part.
      * @param y The imaginary part.
      */
-    public complexNumber(double x, double y) {
+    public complexNumberExcepHand(double x, double y) {
         super(x, y);
     }
 
@@ -40,8 +40,8 @@ public class complexNumber extends Vector2D {
      * @param other The complex number to add to this one.
      * @return The result of the addition.
      */
-    public complexNumber add(complexNumber other) {
-        return new complexNumber(this.getX() + other.getX(), this.getY() + other.getY());
+    public complexNumberExcepHand add(complexNumberExcepHand other) {
+        return new complexNumberExcepHand(this.getX() + other.getX(), this.getY() + other.getY());
     }
 
     /**
@@ -50,8 +50,8 @@ public class complexNumber extends Vector2D {
      * @param other The complex number to subtract from this one.
      * @return The result of the subtraction.
      */
-    public complexNumber subtract(complexNumber other) {
-        return new complexNumber(this.getX() - other.getX(), this.getY() - other.getY());
+    public complexNumberExcepHand subtract(complexNumberExcepHand other) {
+        return new complexNumberExcepHand(this.getX() - other.getX(), this.getY() - other.getY());
     }
 
     /**
@@ -60,10 +60,10 @@ public class complexNumber extends Vector2D {
      * @param other The complex number to multiply with this one.
      * @return The result of the multiplication.
      */
-    public complexNumber multiply(complexNumber other) {
+    public complexNumberExcepHand multiply(complexNumberExcepHand other) {
         double realPart = this.getX() * other.getX() - this.getY() * other.getY();
         double imaginaryPart = this.getX() * other.getY() + this.getY() * other.getX();
-        return new complexNumber(realPart, imaginaryPart);
+        return new complexNumberExcepHand(realPart, imaginaryPart);
     }
 
     /**
@@ -73,14 +73,14 @@ public class complexNumber extends Vector2D {
      * @return The result of the division.
      * @throws ArithmeticException if the divisor is zero.
      */
-    public complexNumber divide(complexNumber other) {
+    public complexNumberExcepHand divide(complexNumberExcepHand other) {
         double denominator = other.getX() * other.getX() + other.getY() * other.getY();
         if (denominator == 0) {
             throw new ArithmeticException("Division by zero is not allowed.");
         }
         double realPart = (this.getX() * other.getX() + this.getY() * other.getY()) / denominator;
         double imaginaryPart = (this.getY() * other.getX() - this.getX() * other.getY()) / denominator;
-        return new complexNumber(realPart, imaginaryPart);
+        return new complexNumberExcepHand(realPart, imaginaryPart);
     }
 
     /**
@@ -89,14 +89,14 @@ public class complexNumber extends Vector2D {
      * @param n The exponent for the power operation.
      * @return The complex number raised to the power of n.
      */
-    public complexNumber power(int n) {
+    public complexNumberExcepHand power(int n) {
         double module = getModule();
         double argument = getArgument();
         double resultModule = Math.pow(module, n);
         double resultArgument = argument * n;
         double realPart = resultModule * Math.cos(resultArgument);
         double imaginaryPart = resultModule * Math.sin(resultArgument);
-        return new complexNumber(realPart, imaginaryPart);
+        return new complexNumberExcepHand(realPart, imaginaryPart);
     }
 
     /**
@@ -106,10 +106,10 @@ public class complexNumber extends Vector2D {
      * @param argument The argument of the complex number in radians.
      * @return A complex number created from polar coordinates.
      */
-    public static complexNumber fromPolar(double module, double argument) {
+    public static complexNumberExcepHand fromPolar(double module, double argument) {
         double realPart = module * Math.cos(argument);
         double imaginaryPart = module * Math.sin(argument);
-        return new complexNumber(realPart, imaginaryPart);
+        return new complexNumberExcepHand(realPart, imaginaryPart);
     }
 
     /**
@@ -118,7 +118,7 @@ public class complexNumber extends Vector2D {
      * @return The complex number entered by the user.
      * @throws InvalidInputException if the input format is incorrect.
      */
-    public static complexNumber getComplexNumberFromUser() throws InvalidInputException {
+    public static complexNumberExcepHand getComplexNumberFromUser() throws InvalidInputException {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter a complex number in the form x+iy or other valid variations:");
         String input = scanner.nextLine();
@@ -128,7 +128,7 @@ public class complexNumber extends Vector2D {
         if (input.matches(regex)) {
             double realPart = Double.parseDouble(input.replaceAll(regex, "$1"));
             double imaginaryPart = Double.parseDouble(input.replaceAll(regex, "$2$3"));
-            return new complexNumber(realPart, imaginaryPart);
+            return new complexNumberExcepHand(realPart, imaginaryPart);
         } else {
             throw new InvalidInputException("Invalid input format. Please enter a valid complex number.", input);
         }
@@ -143,7 +143,7 @@ public class complexNumber extends Vector2D {
     public boolean equals(Object obj) {
         if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;
-        complexNumber other = (complexNumber) obj;
+        complexNumberExcepHand other = (complexNumberExcepHand) obj;
         return Double.compare(other.getX(), getX()) == 0 && Double.compare(other.getY(), getY()) == 0;
     }
 

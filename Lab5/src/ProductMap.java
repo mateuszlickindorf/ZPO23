@@ -1,7 +1,7 @@
 /**
  * The Product interface represents a product in a warehouse.
  */
-public interface Product {
+public interface ProductMap {
     /**
      * Gets the name of the product.
      *
