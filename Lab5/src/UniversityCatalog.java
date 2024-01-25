@@ -11,8 +11,8 @@ public class UniversityCatalog {
     /**
      * Adds a subject to the catalog.
      *
-     * @param subjectId    The ID of the subject.
-     * @param subject      The Subject object containing information about the subject.
+     * @param subjectId The ID of the subject.
+     * @param subject   The Subject object containing information about the subject.
      * @throws IllegalArgumentException If the subject ID is already in use.
      */
     public void addSubject(String subjectId, Subject subject) {
@@ -77,15 +77,19 @@ public class UniversityCatalog {
         private int hoursInWeek;
         private FormOfPassing formOfPassing;
 
+        private ClassType classType;
+
         public Subject(String courseId, String courseName, int ectsCredits,
-                       int hoursInSemester, int hoursInWeek, FormOfPassing formOfPassing) {
+                       int hoursInSemester, int hoursInWeek, FormOfPassing formOfPassing, ClassType classType) {
             this.courseId = courseId;
             this.courseName = courseName;
             this.ectsCredits = ectsCredits;
             this.hoursInSemester = hoursInSemester;
             this.hoursInWeek = hoursInWeek;
             this.formOfPassing = formOfPassing;
+            this.classType = classType;
         }
+
         /**
          * Gets the ID of the course.
          *
@@ -141,20 +145,30 @@ public class UniversityCatalog {
         }
 
         /**
+         * Gets the ClassType of the course.
+         *
+         * @return The class type of the course (Lecture or Exercise)
+         */
+
+        public ClassType getClassType() {
+            return classType;
+        }
+
+        /**
          * Converts the subject information to a string representation.
          *
          * @return The string representation of the subject.
          */
         @Override
-    public String toString() {
-        return "Subject{" +
-                "courseId='" + courseId + '\'' +
-                ", courseName='" + courseName + '\'' +
-                ", ectsCredits=" + ectsCredits +
-                ", hoursInSemester=" + hoursInSemester +
-                ", hoursInWeek=" + hoursInWeek +
-                ", formOfPassing=" + formOfPassing +
-                '}';
+        public String toString() {
+            return "Subject{" +
+                    "courseId='" + courseId + '\'' +
+                    ", courseName='" + courseName + '\'' +
+                    ", ectsCredits=" + ectsCredits +
+                    ", hoursInSemester=" + hoursInSemester +
+                    ", hoursInWeek=" + hoursInWeek +
+                    ", formOfPassing=" + formOfPassing +
+                    '}';
         }
     }
 
@@ -164,5 +178,11 @@ public class UniversityCatalog {
     public enum FormOfPassing {
         EGZAMIN, ZALICZENIE
     }
-}
 
+    /**
+     * Enum class representing the type of a course.
+     */
+    public enum ClassType {
+        WYKLAD, CWICZENIA
+    }
+}
