@@ -67,6 +67,36 @@ public class UniversityCatalog {
     }
 
     /**
+     * Counts the total number of hours of a given type of class (e.g., WYKLAD)
+     * and the number of hours and total ECTS credits of classes ending with an EGZAMIN.
+     *
+     * @param classType The type of class to count hours for (e.g., WYKLAD).
+     * @return A string with the count information.
+     */
+    public String countHoursAndCredits(ClassType classType) {
+        long totalHoursOfType = subjects.values()
+                .stream()
+                .filter(subject -> subject.getClassType() == classType)
+                .mapToLong(Subject::getHoursInWeek)
+                .sum();
+
+        long totalExamHours = subjects.values()
+                .stream()
+                .filter(subject -> subject.getFormOfPassing() == FormOfPassing.EGZAMIN)
+                .mapToLong(Subject::getHoursInWeek)
+                .sum();
+
+        int totalExamCredits = subjects.values()
+                .stream()
+                .filter(subject -> subject.getFormOfPassing() == FormOfPassing.EGZAMIN)
+                .mapToInt(Subject::getEctsCredits)
+                .sum();
+
+        return String.format("Total %s hours: %d\nTotal hours of classes ending with EGZAMIN: %d\nTotal EGZAMIN ECTS credits: %d",
+                classType, totalHoursOfType, totalExamHours, totalExamCredits);
+    }
+
+    /**
      * Represents a subject at the University.
      */
     public static class Subject {
@@ -178,9 +208,8 @@ public class UniversityCatalog {
     public enum FormOfPassing {
         EGZAMIN, ZALICZENIE
     }
-
     /**
-     * Enum class representing the type of a course.
+     * Enum class representing the type of course.
      */
     public enum ClassType {
         WYKLAD, CWICZENIA

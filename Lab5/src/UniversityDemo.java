@@ -32,6 +32,8 @@ public class UniversityDemo {
 
         System.out.println("\nAll Subjects Information After Deletion:");
         printAllSubjectsInfo(universityCatalog);
+
+        System.out.println(universityCatalog.countHoursAndCredits(UniversityCatalog.ClassType.WYKLAD));
     }
 
     private static void printSubjectInfo(UniversityCatalog catalog, String subjectId) {
