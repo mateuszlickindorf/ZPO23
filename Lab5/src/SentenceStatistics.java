@@ -1,66 +1,121 @@
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Scanner;
 
-/**
- * This class performs statistics on a sentence provided by the user.
- * It counts the total number of words and characters, as well as the number of occurrences
- * of individual words and characters.
- */
-public class SentenceStatistics {
-
     /**
-     * The main method that takes user input, performs statistics, and displays the results.
-     *
-     * @param args The command-line arguments (not used in this program).
+     * Performs statistics on a given sentence - counts the total number of words/characters and the occurrences of
+     * individual words/characters.
      */
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter a sentence: ");
-        String sentence = scanner.nextLine();
-        scanner.close();
+    public class SentenceStatistics {
 
-        Map<String, Integer> wordOccurrences = countWordOccurrences(sentence);
-        Map<Character, Integer> charOccurrences = countCharOccurrences(sentence);
+        private String sentence;
 
-        System.out.println("Total number of words: " + wordOccurrences.size());
-        System.out.println("Word occurrences: " + wordOccurrences);
-
-        System.out.println("Total number of characters: " + charOccurrences.size());
-        System.out.println("Character occurrences: " + charOccurrences);
-    }
-
-    /**
-     * Counts the occurrences of individual words in the given sentence.
-     *
-     * @param sentence The input sentence.
-     * @return A map containing words as keys and their occurrences as values.
-     */
-    private static Map<String, Integer> countWordOccurrences(String sentence) {
-        String[] words = sentence.split("\\s+");
-        Map<String, Integer> wordOccurrences = new HashMap<>();
-
-        for (String word : words) {
-            wordOccurrences.put(word, wordOccurrences.getOrDefault(word, 0) + 1);
+        /**
+         * Constructor of the class.
+         *
+         * @param sentence Optional input sentence
+         */
+        public SentenceStatistics(Optional<String> sentence) {
+            this.sentence = sentence.orElse(null);
         }
 
-        return wordOccurrences;
-    }
-
-    /**
-     * Counts the occurrences of individual characters in the given sentence.
-     *
-     * @param sentence The input sentence.
-     * @return A map containing characters as keys and their occurrences as values.
-     */
-    private static Map<Character, Integer> countCharOccurrences(String sentence) {
-        char[] chars = sentence.toCharArray();
-        Map<Character, Integer> charOccurrences = new HashMap<>();
-
-        for (char c : chars) {
-            charOccurrences.put(c, charOccurrences.getOrDefault(c, 0) + 1);
+        /**
+         * Sets the input sentence for statistics.
+         *
+         * @param sentence Input sentence
+         */
+        public void setSentence(String sentence) {
+            this.sentence = sentence;
         }
 
-        return charOccurrences;
+        /**
+         * Gets the total number of words in the input sentence.
+         *
+         * @return The total number of words
+         */
+        public int getWordCount() {
+            if (sentence != null && !sentence.isEmpty()) {
+                return (int) Optional.ofNullable(sentence)
+                        .map(s -> s.split("\\s+").length)
+                        .orElse(0);
+            } else {
+                return 0;
+            }
+        }
+
+        /**
+         * Gets the total number of characters in the input sentence.
+         *
+         * @return The total number of characters
+         */
+        public int getCharCount() {
+            if (sentence != null) {
+                return (int) Optional.ofNullable(sentence)
+                        .map(String::length)
+                        .orElse(0);
+            } else {
+                return 0;
+            }
+        }
+
+        /**
+         * Gets the occurrences of individual words in the input sentence.
+         *
+         * @return A map containing word occurrences
+         */
+        public Map<String, Integer> getWordOccurrences() {
+            if (sentence != null && !sentence.isEmpty()) {
+                return Optional.ofNullable(sentence)
+                        .map(s -> {
+                            String[] words = s.split("\\s+");
+                            Map<String, Integer> wordCountMap = new HashMap<>();
+                            for (String word : words) {
+                                wordCountMap.put(word, wordCountMap.getOrDefault(word, 0) + 1);
+                            }
+                            return wordCountMap;
+                        })
+                        .orElse(new HashMap<>());
+            } else {
+                return new HashMap<>();
+            }
+        }
+
+        /**
+         * Gets the occurrences of individual characters in the input sentence.
+         *
+         * @return A map containing character occurrences
+         */
+        public Map<Character, Integer> getCharOccurrences() {
+            if (sentence != null) {
+                return Optional.ofNullable(sentence)
+                        .map(s -> {
+                            Map<Character, Integer> charCountMap = new HashMap<>();
+                            for (char c : s.toCharArray()) {
+                                charCountMap.put(c, charCountMap.getOrDefault(c, 0) + 1);
+                            }
+                            return charCountMap;
+                        })
+                        .orElse(new HashMap<>());
+            } else {
+                return new HashMap<>();
+            }
+        }
+
+        /**
+         * Main method for showing the capabilities of the SentenceStatistics class.
+         */
+        public static void main(String[] args) {
+            Scanner scanner = new Scanner(System.in);
+            System.out.print("Enter a sentence: ");
+            String userInput = scanner.nextLine();
+            SentenceStatistics stats = new SentenceStatistics(Optional.of(userInput));
+
+            System.out.println("Word Count: " + stats.getWordCount());
+            System.out.println("Character Count: " + stats.getCharCount());
+            System.out.println("Word Occurrences: " + stats.getWordOccurrences());
+            System.out.println("Character Occurrences: " + stats.getCharOccurrences());
+
+            scanner.close();
+        }
     }
-}
