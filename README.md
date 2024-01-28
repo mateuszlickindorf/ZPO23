@@ -10,3 +10,7 @@ Stworzone na potrzeby zadania 2 klasy abstrakcyjne zostały zrealizowane w branc
 # Laboratorium 6
 
 W obrębie tego laboratorium będę pracował wyłącznie na klasach z poprzednich zadań, pomyślałem że jeśli każda implementacja stanowi alternatywny pomysł/modyfikację poprzednich to, wprowadzając porządek do nazewnictwa, każda pojawi się na osobnym branchu nazwanym po numerze zadania do którego się odnosi (***6.1***, ***6.2*** ...).
+
+# Laboratorium 7
+
+W obrębie tego laboratorium również operujemy wyłącznie na klasach z poprzednich zadań, analogicznie do poprzedniej listy każde zadanie pojawi się na osobnym branchu nazwanym po numerze zadania do którego się odnosi (***7.1***, ***7.2*** ...).
