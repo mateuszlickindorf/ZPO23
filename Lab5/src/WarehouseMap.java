@@ -5,7 +5,7 @@ import java.util.Map;
  * Represents a warehouse that stores products in a map.
  */
 public class WarehouseMap {
-    private Map<String, Product> productMap;
+    private Map<String, ProductMap> productMap;
 
     /**
      * Constructs a new Warehouse with an empty map of products.
@@ -20,7 +20,7 @@ public class WarehouseMap {
      * @param product The product to be added.
      * @throws IllegalArgumentException If the provided product is null.
      */
-    public void addProduct(Product product) {
+    public void addProduct(ProductMap product) {
         if (product != null) {
             String productName = product.fetchName();
             productMap.put(productName, product);
@@ -35,8 +35,7 @@ public class WarehouseMap {
      * @param productName The name of the product to retrieve.
      * @return The product with the specified name, or null if not found.
      */
-    public Product getProduct(String productName) {
-        return productMap.get(productName);
+    public ProductMap getProduct(String productName) {return productMap.get(productName);
     }
 
     /**
@@ -54,7 +53,7 @@ public class WarehouseMap {
      * @param product The updated product.
      * @throws IllegalArgumentException If the provided product is null or not found in the warehouse.
      */
-    public void updateProduct(Product product) {
+    public void updateProduct(ProductMap product) {
         if (product != null) {
             String productName = product.fetchName();
             if (productMap.containsKey(productName)) {
@@ -73,7 +72,7 @@ public class WarehouseMap {
      * @param productName The name of the product to print information about.
      */
     public void printProductInfo(String productName) {
-        Product product = getProduct(productName);
+        ProductMap product = getProduct(productName);
         if (product != null) {
             System.out.println(product.getProductInfo());
         } else {
@@ -86,7 +85,7 @@ public class WarehouseMap {
      */
     public void printAllProducts() {
         System.out.println("Products in the warehouse:");
-        for (Product product : productMap.values()) {
+        for (ProductMap product : productMap.values()) {
             System.out.println(product.getProductInfo());
         }
     }
@@ -98,7 +97,7 @@ public class WarehouseMap {
      */
     public double calculateTotalValue() {
         double totalValue = 0.0;
-        for (Product product : productMap.values()) {
+        for (ProductMap product : productMap.values()) {
             totalValue += product.fetchPrice() * product.fetchCount();
         }
         return totalValue;

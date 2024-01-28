@@ -1,10 +1,11 @@
+import java.io.*;
 import java.util.Objects;
 import java.util.Scanner;
 
 /**
  * Represents a complex number with real and imaginary parts.
  */
-public class complexNumberExtended extends Vector2D {
+public class complexNumberExtended extends Vector2DExtended {
 
     /**
      * Constructs a complex number with the specified real and imaginary parts.
@@ -123,7 +124,7 @@ public class complexNumberExtended extends Vector2D {
         System.out.println("Enter a complex number in the form x+iy or other valid variations:");
         String input = scanner.nextLine();
 
-        // Use a regular expression to validate and extract real and imaginary parts
+        // Regular expression to validate and extract real and imaginary parts
         String regex = "([-+]?\\d*\\.?\\d+)\\s*([-+]?)\\s*([-+]?\\d*\\.?\\d*)i";
         if (input.matches(regex)) {
             double realPart = Double.parseDouble(input.replaceAll(regex, "$1"));
@@ -131,6 +132,98 @@ public class complexNumberExtended extends Vector2D {
             return new complexNumberExtended(realPart, imaginaryPart);
         } else {
             throw new InvalidInputException("Invalid input format. Please enter a valid complex number.", input);
+        }
+    }
+
+    /**
+     * Reads data from a file containing complex numbers and calculates modulus and argument.
+     *
+     * @param fileName The name of the file to read.
+     * @throws IOException if an I/O error occurs.
+     */
+    public static void readComplexData(String fileName) throws IOException {
+
+        File file = new File(fileName);
+        if (!file.exists()) {
+            throw new FileNotFoundException("File not found: " + fileName);
+        }
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
+            String line;
+            System.out.println("# t mod arg");
+            while ((line = reader.readLine()) != null) {
+                if (line.startsWith("#")) continue; // Skip comments
+
+                String[] parts = line.split("\\s+");
+                double t = Double.parseDouble(parts[0]);
+
+                String complexNumberPart = parts[1];
+                String[] realImagParts = complexNumberPart.split("(?=[+-])", 2);
+                if (realImagParts.length > 1) {
+                    realImagParts[1] = realImagParts[1].replaceAll("i", "");
+                }
+                double x = Double.parseDouble(realImagParts[0]);
+                double y = Double.parseDouble(realImagParts[1]);
+
+
+                complexNumberExtended complexNumber = new complexNumberExtended(x, y);
+                double modulus = complexNumber.getModule();
+                double argument = complexNumber.getArgument();
+
+                System.out.printf("%f %f %f%n", t, modulus, argument);
+            }
+        }
+    }
+
+    /**
+     * Writes data to an output file in the specified format.
+     *
+     * @param inputFileName  The name of the input file.
+     * @param outputFileName The name of the output file.
+     * @param append         True if data should be appended to an existing file.
+     * @throws IOException if an I/O error occurs.
+     */
+    public static void writeComplexData(String inputFileName, String outputFileName, boolean append) throws IOException {
+
+        File inputFile = new File(inputFileName);
+        if (!inputFile.exists()) {
+            throw new FileNotFoundException("Input file not found: " + inputFileName);
+        }
+
+        File outputFile = new File(outputFileName);
+        if (outputFileName == null || outputFileName.isEmpty()) {
+            //default output file name if not specified
+            outputFile = new File("out_data.out");
+        }
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(outputFileName, append))) {
+            if (!append) {
+                writer.write("# t mod arg\n");
+            }
+            try (BufferedReader reader = new BufferedReader(new FileReader(inputFileName))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    if (line.trim().isEmpty() || line.startsWith("#")) {
+                        continue;
+                    }
+                    String[] parts = line.split("\\s+");
+                    double t = Double.parseDouble(parts[0]);
+
+                    String complexNumberPart = parts[1];
+                    String[] realImagParts = complexNumberPart.split("(?=[+-])", 2);
+                    if (realImagParts.length > 1) {
+                        realImagParts[1] = realImagParts[1].replaceAll("i", "");
+                    }
+                    double x = Double.parseDouble(realImagParts[0]);
+                    double y = Double.parseDouble(realImagParts[1]);
+
+                    complexNumberExtended complexNumber = new complexNumberExtended(x, y);
+                    double modulus = complexNumber.getModule();
+                    double argument = complexNumber.getArgument();
+
+                    writer.write(String.format("%f %f %f%n", t, modulus, argument));
+                }
+            }
         }
     }
 

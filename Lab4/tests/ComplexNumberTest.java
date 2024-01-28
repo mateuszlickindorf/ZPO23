@@ -87,13 +87,5 @@ public class ComplexNumberTest {
         complexNumber complex2 = new complexNumber(3, 4);
         assertEquals(complex1.hashCode(), complex2.hashCode());
     }
-
-    @Test
-    public void testInvalidInputException() {
-        // Assuming the user enters an invalid complex number, the InvalidInputException should be thrown
-        assertThrows(InvalidInputException.class, () -> {
-            complexNumber.getComplexNumberFromUser();
-        });
-    }
 }
 

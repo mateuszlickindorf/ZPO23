@@ -1,14 +1,14 @@
 /**
  * Klasa reprezentująca Wektor
  */
-public class Vector2D {
+public class Vector2DExtended {
     private double x;
     private double y;
 
     /**
      * Domyślny konstruktor
      */
-    public Vector2D() {
+    public Vector2DExtended() {
         x = 0;
         y = 0;
     }
@@ -18,7 +18,7 @@ public class Vector2D {
      * @param x współrzędna x końca wektora
      * @param y współrzędna y końca wektora
      */
-    public Vector2D(double x, double y) {
+    public Vector2DExtended(double x, double y) {
         this.x = x;
         this.y = y;
     }

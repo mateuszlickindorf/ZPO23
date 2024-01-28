@@ -1,3 +1,5 @@
+import java.io.*;
+
 public class complexNumberExtendedDemo {
     public static void main(String[] args) {
 
@@ -28,13 +30,24 @@ public class complexNumberExtendedDemo {
 
         complexNumberExtended num3 = new complexNumberExtended(1, 2);
         System.out.println("num1 equals num3: " + num1.equals(num3));
+
+//        try {
+//            complexNumberExtended number = complexNumberExtended.getComplexNumberFromUser();
+//        } catch (InvalidInputException e) {
+//            System.out.println("Invalid input: " + e.getMessage());
+//            System.out.println("Invalid input details: " + e.getInput());
+//        }
         try {
-            complexNumberExtended number = complexNumberExtended.getComplexNumberFromUser();
-            // Process the valid input
-        } catch (InvalidInputException e) {
-            System.out.println("Invalid input: " + e.getMessage());
-            System.out.println("Invalid input details: " + e.getInput());
-            // Handle the invalid input case
+            // Example usage:
+            complexNumberExtended.readComplexData("data.dat");
+
+            // Example to append to an existing file or overwrite it
+            complexNumberExtended.writeComplexData("data.dat", "out_data.out", true);
+            // OR
+            complexNumberExtended.writeComplexData("data.dat", "out_data.out", false);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
-    }
 }
