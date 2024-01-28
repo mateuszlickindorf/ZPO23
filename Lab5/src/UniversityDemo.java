@@ -1,3 +1,4 @@
+import java.io.*;
 public class UniversityDemo {
     public static void main(String[] args) {
         // Create a UniversityCatalog
@@ -25,6 +26,30 @@ public class UniversityDemo {
 
         System.out.println("\nAll Subjects Information After Deletion:");
         printAllSubjectsInfo(universityCatalog);
+
+        UniversityCatalog catalog2 = new UniversityCatalog();
+        catalog2.addSubject("CS101", new UniversityCatalog.Subject("ZPO24", "Zaawansowane Parkowanie Opla 24", 3, 45, 5, UniversityCatalog.FormOfPassing.EGZAMIN));
+        catalog2.addSubject("ENG201", new UniversityCatalog.Subject("CPS24", "Cyfrowe Poławianie Stawu 24", 2, 30, 3, UniversityCatalog.FormOfPassing.ZALICZENIE));
+
+        // Export the catalog to JSON
+
+        try {
+            catalog2.exportToJson("catalog2.json");
+            System.out.println("Catalog exported to JSON successfully.");
+        } catch (IOException e) {
+            System.err.println("Error exporting catalog to JSON: " + e.getMessage());
+        }
+
+        // Import the catalog from JSON
+        try {
+            catalog2.importFromJson("catalog2.json");
+            System.out.println("Catalog imported from JSON successfully.");
+        } catch (IOException e) {
+            System.err.println("Error importing catalog from JSON: " + e.getMessage());
+        }
+
+        // Display information about all subjects in the catalog
+        System.out.println("Subject information after import:\n" + catalog2.getAllSubjectsInfo());
     }
 
     private static void printSubjectInfo(UniversityCatalog catalog, String subjectId) {

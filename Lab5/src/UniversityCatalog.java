@@ -1,5 +1,11 @@
 import java.util.HashMap;
 import java.util.Map;
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class UniversityCatalog {
     private Map<String, Subject> subjects;
@@ -164,5 +170,117 @@ public class UniversityCatalog {
     public enum FormOfPassing {
         EGZAMIN, ZALICZENIE
     }
+
+    /**
+     * Exports the catalog to a JSON format file.
+     *
+     * @param fileName The name of the JSON file.
+     * @throws IOException If an I/O error occurs.
+     */
+    public void exportToJson(String fileName) throws IOException {
+        if (fileName == null || fileName.trim().isEmpty()) {
+            throw new IllegalArgumentException("File name must be specified.");
+        }
+
+        try (Writer writer = new FileWriter(fileName)) {
+            writer.write("[\n");
+
+            boolean firstSubject = true;
+            for (Subject subject : subjects.values()) {
+                if (!firstSubject) {
+                    writer.write(",\n");
+                } else {
+                    firstSubject = false;
+                }
+                writeSubjectToJson(writer, subject);
+            }
+
+            writer.write("\n]\n");
+        } catch (IOException e) {
+            throw new IOException("Error exporting to JSON: " + e.getMessage(), e);
+        }
+    }
+
+    /**
+     * Imports the catalog from a JSON format file.
+     *
+     * @param fileName The name of the JSON file.
+     * @throws IOException If an I/O error occurs.
+     */
+    public void importFromJson(String fileName) throws IOException {
+        if (fileName == null || fileName.trim().isEmpty()) {
+            throw new IllegalArgumentException("File name must be specified.");
+        }
+
+        try {
+            if (Files.exists(Paths.get(fileName))) {
+                String jsonContent = new String(Files.readAllBytes(Paths.get(fileName)));
+                subjects.clear();
+                parseJsonSubjects(jsonContent);
+            } else {
+                throw new FileNotFoundException("File not found: " + fileName);
+            }
+        } catch (IOException e) {
+            throw new IOException("Error importing from JSON: " + e.getMessage(), e);
+        }
+    }
+
+    /**
+     * Writes a subject to the given writer in JSON format.
+     *
+     * @param writer  The writer to write JSON content to.
+     * @param subject The subject to be written.
+     * @throws IOException If an I/O error occurs.
+     */
+    private void writeSubjectToJson(Writer writer, Subject subject) throws IOException {
+        writer.write("{\n");
+        writer.write("\"courseId\": \"" + subject.getCourseId() + "\",\n");
+        writer.write("\"courseName\": \"" + subject.getCourseName() + "\",\n");
+        writer.write("\"ectsCredits\": " + subject.getEctsCredits() + ",\n");
+        writer.write("\"type\": \"" + subject.getFormOfPassing() + "\",\n");
+        writer.write("\"hoursInWeek\": " + subject.getHoursInWeek() + ",\n");
+        writer.write("\"hoursInSemester\": " + subject.getHoursInSemester() + ",\n");
+        writer.write("}");
+    }
+
+    /**
+     * Parses JSON content and populates the subjects in the catalog.
+     *
+     * @param jsonContent The JSON content to be parsed.
+     */
+    private void parseJsonSubjects(String jsonContent) {
+        // Assuming each subject is enclosed in curly braces
+        String[] subjectJsonArray = jsonContent.split("\\},\\s*\\{");
+
+        for (String subjectJson : subjectJsonArray) {
+            // Remove leading and trailing braces if present
+            subjectJson = subjectJson.replaceAll("^\\{\\s*|\\s*}$", "");
+
+            String[] properties = subjectJson.split(",\\s*");
+
+            String courseId = extractValue(properties[0]);
+            String courseName = extractValue(properties[1]);
+            int ectsCredits = Integer.parseInt(extractValue(properties[2]));
+            String formOfPassing = extractValue(properties[3]);
+            int hoursInWeek = Integer.parseInt(extractValue(properties[4]));
+            int hoursInSemester = Integer.parseInt(extractValue(properties[5])); // Add parsing logic
+
+            Subject subject = new Subject(courseId, courseName, ectsCredits, hoursInSemester, hoursInWeek,
+                    FormOfPassing.valueOf(formOfPassing)); // Adjust constructor arguments
+            addSubject(courseId, subject);
+        }
+    }
+
+    /**
+     * Extracts the value from a property in the JSON string.
+     *
+     * @param property The property in the JSON string.
+     * @return The extracted value.
+     */
+    private String extractValue(String property) {
+        String[] keyValue = property.split(":\\s*");
+        return keyValue[1].replaceAll("^\"|\"$", "").trim();
+    }
 }
+
 
