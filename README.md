@@ -1,10 +1,19 @@
 # ZPO23-L1
-Zaawansowane programowanie obiektowe kurs 2023
+Zaawansowane programowanie obiektowe kurs 2023.
 
 # Laboratorium 2
 Opisana w zadaniach implementacja statyczna zawarta została w branchu ***static_implementation***.
 
 # Laboratorium 3
+Stworzone na potrzeby zadania 2 klasy abstrakcyjne zostały zrealizowane w branchu ***AbstractImplementation***, jako że wykorzystują klasy napisane w pierwszym zadaniu.
+
+# Laboratorium 4
+Obecne w module klasy NazwaKlasyDemo obrazują funkcjonalność zaproponowanych rozwiązań.
+
+# Laboratorium 5
+Obecne w module klasy NazwaKlasyDemo obrazują funkcjonalność zaproponowanych rozwiązań.
+
+# Laboratorium 5
 Stworzone na potrzeby zadania 2 klasy abstrakcyjne zostały zrealizowane w branchu ***AbstractImplementation***, jako że wykorzystują klasy napisane w pierwszym zadaniu.
 
 # Laboratorium 6
@@ -14,3 +23,7 @@ W obrębie tego laboratorium będę pracował wyłącznie na klasach z poprzedni
 # Laboratorium 7
 
 W obrębie tego laboratorium również operujemy wyłącznie na klasach z poprzednich zadań, analogicznie do poprzedniej listy każde zadanie pojawi się na osobnym branchu nazwanym po numerze zadania do którego się odnosi (***7.1***, ***7.2*** ...).
+
+# Laboratorium 8
+
+W obrębie tego laboratorium klasą wywołującą funkcjonalność zaimplementowanych rozwiązań jest klasa _ListFullDemo_, od niej należy zacząć analizę zaproponowanych rozwiązań.
