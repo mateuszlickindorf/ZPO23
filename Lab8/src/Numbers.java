@@ -1,5 +1,5 @@
 /**
- * Class implementing the Runnable interface to increment a given counter.
+ * Class implementing the  Runnable interface to increment a given counter.
  */
 public class Numbers implements Runnable {
     private Counter totalCount;

@@ -72,24 +72,6 @@ public class WarehouseMap {
      *
      * @param productName The name of the product to print information about.
      */
-    public void printProductInfo(String productName) {
-        Product product = getProduct(productName);
-        if (product != null) {
-            System.out.println(product.getProductInfo());
-        } else {
-            System.out.println("Product not found in the warehouse.");
-        }
-    }
-
-    /**
-     * Prints information about all products in the warehouse.
-     */
-    public void printAllProducts() {
-        System.out.println("Products in the warehouse:");
-        for (Product product : productMap.values()) {
-            System.out.println(product.getProductInfo());
-        }
-    }
 
     /**
      * Calculates the total value of all products in the warehouse.

@@ -21,7 +21,7 @@ public class WithdrawThread implements Runnable {
     @Override
     public void run() {
         getBank().withdraw(getWithdrawalAmount());
-        System.out.println("The remaining balance in the account is: " + getBank().getBalance() + " zł");
+        System.out.println("The remaining balance in the account is: " + getBank().getBalance() + " zł ");
     }
 
     /**

@@ -22,7 +22,7 @@ public class WithdrawSynchronizedThread implements Runnable {
     public synchronized void run() {
         synchronized (getBank()) {
             getBank().withdraw(getWithdrawalAmount());
-            System.out.println("The remaining balance in the account is: " + getBank().getBalance() + " zł");
+            System.out.println("The remaining balance in the account is: " + getBank().getBalance() + " zł ");
         }
     }
 

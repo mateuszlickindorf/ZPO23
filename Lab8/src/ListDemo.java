@@ -44,7 +44,7 @@ public class ListDemo {
 
         System.out.println(" ");
         // Task 3b
-        System.out.println("Task 3 - synchronized threads");
+        System.out.println("Task 3 - synchronized threads ");
         SharedBank bank2 = new SharedBank(10000);
         WithdrawSynchronizedThread withdraw3 = new WithdrawSynchronizedThread(bank2, 3000);
         WithdrawSynchronizedThread withdraw4 = new WithdrawSynchronizedThread(bank2, 4000);

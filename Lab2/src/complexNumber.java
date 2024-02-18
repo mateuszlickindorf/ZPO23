@@ -3,7 +3,7 @@ import java.util.Objects;
 /**
  * Represents a complex number with real and imaginary parts.
  */
-public class complexNumber extends Vector2D {
+public class complexNumber extends Vector2DExtended {
 
     /**
      * Constructs a complex number with the specified real and imaginary parts.

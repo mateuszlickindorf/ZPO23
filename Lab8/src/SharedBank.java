@@ -11,7 +11,7 @@ public class SharedBank {
      */
     public SharedBank(int accountBalance) {
         if (accountBalance < 0) {
-            throw new IllegalArgumentException("Invalid amount of money in the account.");
+            throw new IllegalArgumentException("Invalid amount of money in the account. ");
         }
         else {
             this.accountBalance = accountBalance;

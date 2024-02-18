@@ -4,7 +4,7 @@ import java.util.Scanner;
 /**
  * Represents a complex number with real and imaginary parts.
  */
-public class complexNumberExtended extends Vector2D {
+public class complexNumberExtended extends Vector2DExtended {
 
     /**
      * Constructs a complex number with the specified real and imaginary parts.
@@ -130,7 +130,7 @@ public class complexNumberExtended extends Vector2D {
             double imaginaryPart = Double.parseDouble(input.replaceAll(regex, "$2$3"));
             return new complexNumberExtended(realPart, imaginaryPart);
         } else {
-            throw new InvalidInputException("Invalid input format. Please enter a valid complex number.", input);
+            throw new InvalidInputException("Invalid input format. Please enter a valid complex number.", input); 
         }
     }
 

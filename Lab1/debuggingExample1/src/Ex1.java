@@ -1,4 +1,3 @@
-package debuggingExample1.src;
 
 import java.util.Scanner;
 
