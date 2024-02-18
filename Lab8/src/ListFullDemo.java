@@ -2,7 +2,7 @@
 /**
  * Program based on concurrent operation.
  */
-public class ListDemo {
+public class ListFullDemo {
     /**
      * Class Lista8Demo
      * @param args threads executing the program specified by the Counter, Numbers, SharedBank, WithdrawThread, WithdrawThreadSynchronized classes
